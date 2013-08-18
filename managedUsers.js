@@ -5,9 +5,19 @@ Meteor.ManagedUsers = {
 		return {};
 	},
 
+	user: function(userId) {
+		if (userId === undefined)
+			return Meteor.user();
+		else if (typeof userId === "string")
+			return Meteor.users.findOne(userId);
+		else
+			return null;
+	},
+
 	// Input Validation
-	isAdmin: function() {
-		return (Meteor.user() &&  (Meteor.user().username === "admin"));
+	isAdmin: function(userId) {
+		var user = Meteor.ManagedUsers.user(userId);
+		return (user && user.username === "admin");
 	},
 
 	checkUsername: function(username, userId) {
@@ -32,9 +42,12 @@ Meteor.ManagedUsers = {
 		}
 	},
 
-	hasPermission: function(permission) {
-		if(Meteor.user() && ((Meteor.user().username === "admin") || (Meteor.user().permissions && Meteor.user().permissions[permission] == true)))
-			return true;
+	hasPermission: function(permission, userId) {
+		var user = Meteor.ManagedUsers.user(userId);
+		return (user &&
+						(user.username === "admin" ||
+						 (user.permissions && user.permissions[permission] == true))
+					 );
 	}
 }
 

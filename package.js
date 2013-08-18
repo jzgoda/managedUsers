@@ -10,6 +10,6 @@ Package.on_use(function(api) {
 });
 
 Package.on_test(function(api) {
-	api.use(['managedUsers', 'tinytest', 'test-helpers'], ['client', 'server']);
+	api.use(['managedUsers', 'tinytest', 'test-helpers', 'accounts-password'], ['client', 'server']);
 	api.add_files('managedUsers_tests.js', ['client', 'server']);
 });

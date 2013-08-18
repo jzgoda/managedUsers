@@ -44,6 +44,7 @@ if(Meteor.isClient) {
 		logoutStep,
 		function(test, expect) {
 			test.isFalse(Meteor.ManagedUsers.isAdmin());
+			test.isFalse(Meteor.ManagedUsers.isAdmin(Meteor.userId()));
 
 			Accounts.createUser({username: "someone", password: "abc123", profile: {name: "Some One"}}, function(error) {
 				test.equal(error.reason, "Signups forbidden");
@@ -62,6 +63,7 @@ if(Meteor.isClient) {
 				test.equal(error, undefined);
 				test.equal(Meteor.user().username, "admin");
 				test.isTrue(Meteor.ManagedUsers.isAdmin());
+				test.isTrue(Meteor.ManagedUsers.isAdmin(Meteor.userId()));
 			}));
 		},
 
