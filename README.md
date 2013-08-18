@@ -49,7 +49,7 @@ Meteor.ManagedUsers.availablePermissions = function() {
 
 Testing for Permissions
 ------------------------
-` Meteor.ManagedUsers.hasPermission(permissionName) ` accepts a string of the permission's name, and then returns a boolean if the current user has that permission.
+` Meteor.ManagedUsers.hasPermission(permissionName [, userId]) ` accepts a string of the permission's name, and then returns a boolean if the user (defaulting to the current user) has that permission.
 
 
 To Do
